@@ -26,4 +26,11 @@ public class Servico {
     public float getValor() { return valor; }
     public void setValor(float valor) { this.valor = valor; }
     // O ID não precisa de setter, mas pode ter getter se necessário.
+
+
+    @Override
+    public String toString() {
+        return getDescricao();
+    }
+
 }

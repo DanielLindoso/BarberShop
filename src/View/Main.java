@@ -21,7 +21,7 @@ public class Main {
         System.out.println("Usuario: " + barbeiro.getNome());
         
         // Teste Agendamento (Construtor que criamos)
-        Agendamento agendamento = new Agendamento(1, cliente, servico, 45.0f, "28/11/2023 14:00");
+        Agendamento agendamento = new Agendamento(1, cliente, servico, 45.0f, "28/11/2023", "14:00", "Cliente novo");
         System.out.println("Agendamento para: " + agendamento.getCliente().getNome());
         
         System.out.println("Testes concluidos com sucesso!");
