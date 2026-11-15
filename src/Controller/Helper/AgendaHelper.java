@@ -4,7 +4,7 @@ import Model.Agendamento;
 import Model.Cliente;
 import Model.Servico;
 import View.Agenda;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +15,7 @@ public class AgendaHelper implements IHelper {
         this.view = view;
     }
 
-    public void preencherTabela(ArrayList<Agendamento> agendamentos) {
+    public void preencherTabela(List<Agendamento> agendamentos) {
         DefaultTableModel tableModel = (DefaultTableModel) view.getCaixatabela().getModel();
         tableModel.setNumRows(0);
 
@@ -32,7 +32,7 @@ public class AgendaHelper implements IHelper {
         }
     }
 
-    public void preencherCliente(ArrayList<Cliente> clientes) {
+    public void preencherCliente(List<Cliente> clientes) {
         DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getClienteCaixaopcao().getModel();
         comboBoxModel.removeAllElements();
         for (Cliente c : clientes) {
@@ -40,7 +40,7 @@ public class AgendaHelper implements IHelper {
         }
     }
 
-    public void preencherServico(ArrayList<Servico> servicos) {
+    public void preencherServico(List<Servico> servicos) {
         DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getServicoscaixa().getModel();
         comboBoxModel.removeAllElements();
         for (Servico s : servicos) {

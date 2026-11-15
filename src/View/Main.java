@@ -3,27 +3,39 @@ package View;
 import Model.Cliente;
 import Model.Servico;
 import Model.Usuario;
-import Model.Agendamento;
+import Model.DAO.ClienteDAO;
+import Model.DAO.ServicoDAO;
+import Model.DAO.UsuarioDAO;
 
 public class Main {
     public static void main(String[] args) {
-        // Teste Serviço
-        Servico servico = new Servico(1, "Corte Degradê", 45.0f);
-        System.out.println("Servico: " + servico.getDescricao());
+        System.out.println("--- Iniciando inserção de dados de teste ---");
 
-        // Teste Cliente (Agora precisa de todos os parâmetros da herança)
-        // Formato: id, nome, sexo, dataNascimento(String), telefone, email, rg, endereco, cep
-        Cliente cliente = new Cliente(1, "Joao Silva", 'M', "01/01/1990", "11999998888", "joao@email.com", "1234567", "Rua das Flores, 123", "00000-000");
-        System.out.println("Cliente: " + cliente.getNome());
+        try {
+            // 1. Inserir um Usuário para o Login
+            // Formato: (id, nome, sexo, dataNascimento, telefone, email, rg, senha, nivelAcesso)
+            Usuario usuario = new Usuario(0, "barbeiro", 'M', "18/07/1990", "30212121", "barbeiro@email.com", "12345", "barbeiro", "admin");
+            new UsuarioDAO().insert(usuario);
+            System.out.println("✅ Usuário 'barbeiro' inserido com sucesso!");
 
-        // Teste Usuário
-        Usuario barbeiro = new Usuario(1, "Carlos", 'M', "01/01/1985", "11988887777", "carlos@email.com", "7654321", "senha123", "admin");
-        System.out.println("Usuario: " + barbeiro.getNome());
-        
-        // Teste Agendamento (Construtor que criamos)
-        Agendamento agendamento = new Agendamento(1, cliente, servico, 45.0f, "28/11/2023", "14:00", "Cliente novo");
-        System.out.println("Agendamento para: " + agendamento.getCliente().getNome());
-        
-        System.out.println("Testes concluidos com sucesso!");
+            // 2. Inserir um Cliente
+            // Formato: (id, nome, sexo, dataNascimento, telefone, email, rg, endereco, cep)
+            Cliente cliente = new Cliente(0, "João Silva", 'M', "01/01/1990", "11999998888", "joao@email.com", "1234567", "Rua A, 123", "00000-000");
+            new ClienteDAO().insert(cliente);
+            System.out.println("✅ Cliente 'João Silva' inserido com sucesso!");
+
+            // 3. Inserir um Serviço
+            // Formato: (id, descricao, valor)
+            Servico servico = new Servico(0, "Corte Simples", 30.0f);
+            new ServicoDAO().insert(servico);
+            System.out.println("✅ Serviço 'Corte Simples' inserido com sucesso!");
+
+            System.out.println("--- Todos os dados iniciais foram inseridos! ---");
+            System.out.println("Agora você pode rodar o Login.java e entrar com: barbeiro / barbeiro");
+
+        } catch (Exception e) {
+            System.err.println("❌ Erro ao inserir dados: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

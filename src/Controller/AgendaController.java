@@ -8,39 +8,32 @@ import Model.DAO.ClienteDAO;
 import Model.DAO.ServicoDAO;
 import Model.Servico;
 import View.Agenda;
-import java.util.ArrayList;
+import java.util.List;
 
 public class AgendaController {
     private final Agenda view;
     private final AgendaHelper helper;
 
-        public AgendaController(Agenda view) {
+    public AgendaController(Agenda view) {
         this.view = view;
         this.helper = new AgendaHelper(view);
-        
-        // LIGA O BANCO DE DADOS ASSIM QUE O CONTROLLER É CRIADO
-        try {
-            Model.DAO.Banco.inicia();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void atualizaTabela() {
         AgendamentoDAO dao = new AgendamentoDAO();
-        ArrayList<Agendamento> agendamentos = dao.selectAll();
+        List<Agendamento> agendamentos = dao.selectAll();
         helper.preencherTabela(agendamentos);
     }
 
-    public void atualizaCliente() { // Ajustado o nome do método para ficar igual ao View
+    public void atualizaCliente() {
         ClienteDAO dao = new ClienteDAO();
-        ArrayList<Cliente> clientes = dao.selectAll();
+        List<Cliente> clientes = dao.selectAll();
         helper.preencherCliente(clientes);
     }
 
     public void atualizaServico() {
         ServicoDAO dao = new ServicoDAO();
-        ArrayList<Servico> servicos = dao.selectAll();
+        List<Servico> servicos = dao.selectAll();
         helper.preencherServico(servicos);
     }
 
@@ -54,7 +47,6 @@ public class AgendaController {
     public void agendar() {
         Agendamento agendamento = (Agendamento) helper.obterModelo();
         new AgendamentoDAO().insert(agendamento);
-        
         atualizaTabela();
         helper.limparTela();
     }

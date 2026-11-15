@@ -3,17 +3,26 @@ package Model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.*; // Importante para as anotações
 
+@MappedSuperclass
 public abstract class Pessoa {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+    
     protected String nome;
     protected char sexo;
     protected Date dataNascimento;
     protected String telefone;
     protected String email;
     protected String rg;
+    
+        // Construtor vazio (exigido pelo Hibernate)
+    public Pessoa() {
+    }
 
-    // Construtor que recebe a data como String (conforme PDF)
     public Pessoa(int id, String nome, char sexo, String dataNascimento, String telefone, String email, String rg) {
         this.id = id;
         this.nome = nome;

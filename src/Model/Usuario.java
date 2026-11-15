@@ -1,8 +1,16 @@
 package Model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario extends Pessoa {
     private String senha;
     private String nivelAcesso;
+    
+        // Construtor vazio exigido pelo Hibernate
+    public Usuario() {
+    }
 
     public Usuario(int id, String nome, char sexo, String dataNascimento, String telefone, String email, String rg, String senha, String nivelAcesso) {
         super(id, nome, sexo, dataNascimento, telefone, email, rg);
@@ -10,7 +18,7 @@ public class Usuario extends Pessoa {
         this.nivelAcesso = nivelAcesso;
     }
 
-    // Construtor reduzido (usado no Helper e no Banco)
+    // Construtor reduzido para login
     public Usuario(int id, String nome, String senha) {
         super(id, nome, ' ', "01/01/2000", "", "", "");
         this.senha = senha;
